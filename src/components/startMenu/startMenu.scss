@@ -34,17 +34,17 @@
     animation: 0.5s titleAnimation ease-in-out;
   }
   &__selection-block {
-    display: -webkit-box;
-    display: -ms-flexbox;
     margin: 0 2% 0 2%;
-    display: flex;
     text-align: center;
     height: 63vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
   .selection-block {
     &__selection-item {
       font-size: 2em;
       height: 100%;
+      width: 100%;
       cursor: pointer;
       display: grid;
       -ms-flex-line-pack: center;
@@ -60,6 +60,7 @@
             0 0 50px rgb(238, 64, 64), 0 0 50px rgb(238, 64, 64),
             0 0 50px rgb(238, 64, 64);
           -webkit-transition: 0.3s;
+          -webkit-transition: 0.2s;
           transition: 0.2s;
         }
         &__description {
@@ -75,6 +76,32 @@
         animation: 0.5s rightItemAnimation ease-in-out;
       }
     }
+  }
+}
+
+@media (max-width: 768px) and (min-width: 360px) {
+  .start-menu__selection-block {
+    grid-template-columns: 1fr;
+  }
+  .selection-block__selection-item {
+    margin-bottom: 1em;
+  }
+  .start-menu__title {
+    font-size: 3.5em;
+    height: 2.1em;
+  }
+  .start-menu {
+    height: 150vh;
+  }
+  body {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 361px) {
+  .start-menu__title {
+    font-size: 3.5em;
+    height: 2.1em;
   }
 }
 
