@@ -7,8 +7,6 @@
 .start-menu__wrap {
   background-image: url("../../assets/10.png");
   background-size: cover;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
 }
 .start-menu {
   width: 100%;
@@ -16,8 +14,6 @@
   text-align: center;
   font-family: "Kaushan Script", Helvetica, sans-serif;
   color: #fff;
-  // text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.11), 0 0 50px rgb(238, 64, 64),
-  //   0 0 50px rgb(238, 64, 64), 0 0 50px rgb(238, 64, 64);
   background-color: rgba(0, 0, 0, 0.5);
 
   &__title {
@@ -53,20 +49,29 @@
       display: grid;
       -ms-flex-line-pack: center;
       align-content: center;
+      &:hover {
+        .selection-item__title {
+          color: rgb(238, 64, 64);
+        }
+      }
       .selection-item {
         &__title {
           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.11),
             0 0 50px rgb(238, 64, 64), 0 0 50px rgb(238, 64, 64),
             0 0 50px rgb(238, 64, 64);
+          -webkit-transition: 0.3s;
+          transition: 0.2s;
         }
         &__description {
           font-size: 0.87em;
         }
       }
       &--left {
+        -webkit-animation: 0.5s leftItemAnimation ease-in-out;
         animation: 0.5s leftItemAnimation ease-in-out;
       }
       &--right {
+        -webkit-animation: 0.5s rightItemAnimation ease-in-out;
         animation: 0.5s rightItemAnimation ease-in-out;
       }
     }
@@ -99,12 +104,40 @@
   }
 }
 
-@keyframes leftItemAnimation {
+@-webkit-keyframes leftItemAnimation {
   from {
+    -webkit-transform: translateX(-40%);
     transform: translateX(-40%);
     opacity: 0;
   }
   to {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes leftItemAnimation {
+  from {
+    -webkit-transform: translateX(-40%);
+    transform: translateX(-40%);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes rightItemAnimation {
+  from {
+    -webkit-transform: translateX(40%);
+    transform: translateX(40%);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
   }
@@ -112,10 +145,12 @@
 
 @keyframes rightItemAnimation {
   from {
+    -webkit-transform: translateX(40%);
     transform: translateX(40%);
     opacity: 0;
   }
   to {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
   }
