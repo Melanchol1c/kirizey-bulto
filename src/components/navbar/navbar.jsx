@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./navbar.scss";
+import { Link } from "react-router-dom";
 
 class Navbar extends Component {
   state = {};
@@ -7,7 +8,9 @@ class Navbar extends Component {
     return (
       <header>
         <nav className="navbar">
-          <h2 className="navbar__logo">Balto</h2>
+          <Link to="/">
+            <h2 className="navbar__logo">Balto</h2>
+          </Link>
         </nav>
       </header>
     );
