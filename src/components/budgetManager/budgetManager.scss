@@ -1,9 +1,53 @@
 @import "../vars.scss";
 
-.main-board {
+.budget-manager-board {
   width: 100%;
-  height: calc(100vh - 3em);
-  background-color: $primaryColor;
-  opacity: 0.9;
+  height: 100vh;
+  background-image: url("../../assets/10.png");
+  background-size: cover;
   color: #fff;
+  text-align: center;
+
+  &__title {
+    font-size: 2.5em;
+    margin-top: 1%;
+    font-family: "Kaushan Script", Helvetica, sans-serif;
+  }
+
+  &__manager-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 3%;
+  }
+
+  &__statistic-board {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 60vh;
+    margin: 5%;
+    padding: 2%;
+    overflow-y: auto;
+  }
+}
+
+.statistic-board {
+  &__title {
+    font-size: 1.5em;
+    margin-top: 5%;
+  }
+  &__list {
+    list-style: none;
+    margin-top: 5%;
+    line-height: 2;
+  }
+}
+
+.manipulating-board {
+  &__add-btn {
+    margin-top: 6%;
+  }
+  &__title {
+    font-family: "Kaushan Script", Helvetica, sans-serif;
+    font-size: 2em;
+    margin-top: 8%;
+  }
 }

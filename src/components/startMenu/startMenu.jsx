@@ -27,7 +27,7 @@ class StartMenu extends Component {
                   </div>
                 </Link>
                 <Link
-                  to="/task_manager"
+                  to="/budget_manager"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   <div className="selection-block__selection-item selection-block__selection-item--right">
