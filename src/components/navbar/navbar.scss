@@ -1,5 +1,7 @@
+@import "../vars.scss";
+
 .navbar {
-  background-color: rgb(238, 64, 64);
+  background-color: $primaryColor;
   height: 3em;
   display: -webkit-box;
   display: -ms-flexbox;
