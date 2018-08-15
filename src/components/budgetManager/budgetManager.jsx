@@ -51,33 +51,45 @@ class BudgetManager extends Component {
   }
 
   handleGetProfit() {
-    this.setState({
-      monthEnP: [
-        ...this.state.monthEnP,
-        {
-          type: "profit",
-          name: this.state.name,
-          value: this.state.value,
-          date: this.state.date
-        }
-      ]
-    });
-    this.setState({ name: "", value: "", date: "" });
+    if (
+      !this.state.name + "" &&
+      !this.state.value == "" &&
+      this.state.value.match(/^\d+$/)
+    ) {
+      this.setState({
+        monthEnP: [
+          ...this.state.monthEnP,
+          {
+            type: "profit",
+            name: this.state.name,
+            value: this.state.value,
+            date: this.state.date
+          }
+        ]
+      });
+      this.setState({ name: "", value: "", date: "" });
+    }
   }
 
   handleGetExpance() {
-    this.setState({
-      monthEnP: [
-        ...this.state.monthEnP,
-        {
-          type: "expance",
-          name: this.state.name,
-          value: this.state.value,
-          date: this.state.date
-        }
-      ]
-    });
-    this.setState({ name: "", value: "", date: "" });
+    if (
+      !this.state.name + "" &&
+      !this.state.value == "" &&
+      this.state.value.match(/^\d+$/)
+    ) {
+      this.setState({
+        monthEnP: [
+          ...this.state.monthEnP,
+          {
+            type: "expanse",
+            name: this.state.name,
+            value: this.state.value,
+            date: this.state.date
+          }
+        ]
+      });
+      this.setState({ name: "", value: "", date: "" });
+    }
   }
 
   render() {
@@ -122,47 +134,45 @@ class BudgetManager extends Component {
             </div>
             <div className="budget-manager-board__manipulating-board">
               <h3 className="manipulating-board__title">Add Profit</h3>
-              <form action="">
-                <Row>
-                  <Input
-                    type="text"
-                    s={6}
-                    label="Profit name"
-                    validate
-                    required
-                    value={this.state.name}
-                    onChange={this.handleNameChange.bind(this)}
-                  >
-                    <Icon>control_point</Icon>
-                  </Input>
-                  <Input
-                    s={6}
-                    label="Value"
-                    validate
-                    required
-                    value={this.state.value}
-                    onChange={this.handleValueChange.bind(this)}
-                  >
-                    <Icon>attach_money</Icon>
-                  </Input>
-                  <Input
-                    s={6}
-                    name="on"
-                    type="date"
-                    required
-                    placeholder="Select date"
-                    onChange={this.handleDateChange.bind(this)}
-                  >
-                    <Icon>calendar_today</Icon>
-                  </Input>
-                  <Button
-                    className="manipulating-board__add-btn waves-effect waves-light"
-                    onClick={this.handleGetProfit.bind(this)}
-                  >
-                    Add Profit
-                  </Button>
-                </Row>
-              </form>
+              <Row>
+                <Input
+                  type="text"
+                  s={6}
+                  label="Profit name"
+                  validate
+                  required
+                  value={this.state.name}
+                  onChange={this.handleNameChange.bind(this)}
+                >
+                  <Icon>control_point</Icon>
+                </Input>
+                <Input
+                  s={6}
+                  label="Value"
+                  validate
+                  required
+                  value={this.state.value}
+                  onChange={this.handleValueChange.bind(this)}
+                >
+                  <Icon>attach_money</Icon>
+                </Input>
+                <Input
+                  s={6}
+                  name="on"
+                  type="date"
+                  required
+                  placeholder="Select date"
+                  onChange={this.handleDateChange.bind(this)}
+                >
+                  <Icon>calendar_today</Icon>
+                </Input>
+                <Button
+                  className="manipulating-board__add-btn waves-effect waves-light"
+                  onClick={this.handleGetProfit.bind(this)}
+                >
+                  Add Profit
+                </Button>
+              </Row>
               <h3 className="manipulating-board__title">Add Expense</h3>
               <Row>
                 <Input
