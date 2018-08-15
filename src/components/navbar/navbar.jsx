@@ -8,9 +8,11 @@ class Navbar extends Component {
     return (
       <header>
         <nav className="navbar">
-          <Link to="/">
+          {/* <Link to="/"> */}
+          <a href="/">
             <h2 className="navbar__logo">Balto</h2>
-          </Link>
+          </a>
+          {/* </Link> */}
         </nav>
       </header>
     );
