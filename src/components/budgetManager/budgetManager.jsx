@@ -1,41 +1,56 @@
 import React, { Component } from "react";
-import Navbar from "../navbar/navbar";
+
 import "./budgetManager.scss";
-import { Button, Input, Icon, Row } from "react-materialize";
+import Navbar from "../navbar/navbar";
+import ManipulatingBoard from "./manipulatingBoard/manipulatingBoard";
+import TransactionsBoard from "./transactionsBoard/transactionsBoard";
 
 class BudgetManager extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: Date.now(),
+      id: "",
+      type: "",
       name: "",
       value: "",
       date: "",
-      monthEnP: [
-        {
-          id: 1,
-          type: "profit",
-          name: "qdasd",
-          value: 1000,
-          date: "12/12/12"
-        },
-        {
-          id: 2,
-          type: "expanse",
-          name: "qdasd",
-          value: 1000,
-          date: "12/34/44"
-        },
-        {
-          id: 3,
-          type: "profit",
-          name: "qdasd",
-          value: 1000,
-          date: "22/22/22"
-        }
-      ]
+      expancesAndProfits: []
     };
+  }
+
+  render() {
+    return (
+      <section className="budget-manager-board">
+        <Navbar />
+
+        <h1 className="budget-manager-board__title">Budget Manager</h1>
+        <div className="budget-manager-board__manager-wrap">
+          <div className="budget-manager-board__statistic-board today-statistic">
+            <h3 className="statistic-board__title">
+              Expenses and profits for today
+            </h3>
+
+            {this.renderTodayTransactions()}
+          </div>
+          <div className="budget-manager-board__manipulating-board">
+            <ManipulatingBoard
+              nameChange={this.handleNameChange.bind(this)}
+              valueChange={this.handleValueChange.bind(this)}
+              dateChange={this.handleDateChange.bind(this)}
+              getProfit={this.handleGetProfit.bind(this)}
+              getExpanse={this.handleGetExpance.bind(this)}
+            />
+          </div>
+          <div className="budget-manager-board__statistic-board all-statistic">
+            <h3 className="statistic-board__title">
+              Expenses and profits for month
+            </h3>
+            {this.renderMonthTransactions()}
+          </div>
+        </div>
+      </section>
+    );
   }
 
   handleNameChange(e) {
@@ -51,210 +66,103 @@ class BudgetManager extends Component {
   }
 
   handleGetProfit() {
-    if (
-      !this.state.name + "" &&
-      !this.state.value == "" &&
-      this.state.value.match(/^\d+$/)
-    ) {
+    const { name, value, date, expancesAndProfits } = this.state;
+    if (!name == "" && !value == "" && !date == "" && value.match(/^\d+$/)) {
       this.setState({
-        monthEnP: [
-          ...this.state.monthEnP,
+        expancesAndProfits: [
+          ...expancesAndProfits,
           {
-            type: "profit",
-            name: this.state.name,
-            value: this.state.value,
-            date: this.state.date
+            id: Date.now(),
+            type: "Profit",
+            name: name,
+            value: value,
+            date: date
           }
         ]
       });
-      this.setState({ name: "", value: "", date: "" });
+      this.successToastBlow();
+      this.setState({
+        id: "",
+        type: "",
+        name: "",
+        value: "",
+        date: ""
+      });
+    } else {
+      this.errorToastBlow();
     }
   }
 
   handleGetExpance() {
-    if (
-      !this.state.name + "" &&
-      !this.state.value == "" &&
-      this.state.value.match(/^\d+$/)
-    ) {
+    const { name, value, date, expancesAndProfits } = this.state;
+    if (!name == "" && !value == "" && !date == "" && value.match(/^\d+$/)) {
       this.setState({
-        monthEnP: [
-          ...this.state.monthEnP,
+        expancesAndProfits: [
+          ...expancesAndProfits,
           {
-            type: "expanse",
-            name: this.state.name,
-            value: this.state.value,
-            date: this.state.date
+            id: Date.now(),
+            type: "Expanse",
+            name: name,
+            value: value,
+            date: date
           }
         ]
       });
-      this.setState({ name: "", value: "", date: "" });
+      this.successToastBlow();
+      this.setState({
+        id: "",
+        type: "",
+        name: "",
+        value: "",
+        date: ""
+      });
+    } else {
+      this.errorToastBlow();
     }
   }
 
-  render() {
-    return (
-      <React.Fragment>
-        <section className="budget-manager-board">
-          <Navbar />
-
-          <h1 className="budget-manager-board__title">Budget Manager</h1>
-          <div className="budget-manager-board__manager-wrap">
-            <div className="budget-manager-board__statistic-board today-statistic">
-              <h3 className="statistic-board__title">
-                Expenses and profits for today
-              </h3>
-
-              <ul className="statistic-board__list">
-                {this.state.monthEnP.map((exp, i) => (
-                  <li key={i}>
-                    {exp.date.substr(0, 2) == new Date().getDate()
-                      ? exp.type === "profit"
-                        ? exp.type +
-                          ": " +
-                          exp.date +
-                          " " +
-                          exp.name +
-                          " " +
-                          exp.value +
-                          "$"
-                        : exp.type +
-                          ": " +
-                          exp.date +
-                          " " +
-                          exp.name +
-                          " " +
-                          "-" +
-                          exp.value +
-                          "$"
-                      : ""}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="budget-manager-board__manipulating-board">
-              <h3 className="manipulating-board__title">Add Profit</h3>
-              <Row>
-                <Input
-                  type="text"
-                  s={6}
-                  label="Profit name"
-                  validate
-                  required
-                  value={this.state.name}
-                  onChange={this.handleNameChange.bind(this)}
-                >
-                  <Icon>control_point</Icon>
-                </Input>
-                <Input
-                  s={6}
-                  label="Value"
-                  validate
-                  required
-                  value={this.state.value}
-                  onChange={this.handleValueChange.bind(this)}
-                >
-                  <Icon>attach_money</Icon>
-                </Input>
-                <Input
-                  s={6}
-                  name="on"
-                  type="date"
-                  required
-                  placeholder="Select date"
-                  onChange={this.handleDateChange.bind(this)}
-                >
-                  <Icon>calendar_today</Icon>
-                </Input>
-                <Button
-                  className="manipulating-board__add-btn waves-effect waves-light"
-                  onClick={this.handleGetProfit.bind(this)}
-                >
-                  Add Profit
-                </Button>
-              </Row>
-              <h3 className="manipulating-board__title">Add Expense</h3>
-              <Row>
-                <Input
-                  s={6}
-                  label="Expense name"
-                  required
-                  validate
-                  onChange={this.handleNameChange.bind(this)}
-                >
-                  <Icon>control_point</Icon>
-                </Input>
-                <Input
-                  s={6}
-                  label="Value"
-                  required
-                  validate
-                  onChange={this.handleValueChange.bind(this)}
-                >
-                  <Icon>attach_money</Icon>
-                </Input>
-                <Input
-                  s={6}
-                  name="on"
-                  type="date"
-                  required
-                  placeholder="Select date"
-                  onChange={this.handleDateChange.bind(this)}
-                >
-                  <Icon>calendar_today</Icon>
-                </Input>
-                <Button
-                  className="manipulating-board__add-btn waves-effect waves-light"
-                  onClick={this.handleGetExpance.bind(this)}
-                >
-                  Add Expense
-                </Button>
-              </Row>
-
-              <Button
-                floating
-                fab="horizontal"
-                icon="mode_edit"
-                className="red manipulating-board__add-btn"
-                large
-              >
-                <Button floating icon="add" className="green" />
-                <Button floating icon="delete" className="red" />
-              </Button>
-            </div>
-            <div className="budget-manager-board__statistic-board all-statistic">
-              <h3 className="statistic-board__title">
-                Expenses and profits for month
-              </h3>
-              <ul className="statistic-board__list">
-                {this.state.monthEnP.map((exp, i) => (
-                  <li key={i}>
-                    {exp.type === "profit"
-                      ? exp.type +
-                        ": " +
-                        exp.date +
-                        " " +
-                        exp.name +
-                        " " +
-                        exp.value +
-                        "$"
-                      : exp.type +
-                        ": " +
-                        exp.date +
-                        " " +
-                        exp.name +
-                        " " +
-                        "-" +
-                        exp.value +
-                        "$"}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-      </React.Fragment>
+  successToastBlow() {
+    window.Materialize.toast(
+      `"${this.state.name}" on ${this.state.value}$ succesfully added!`,
+      3000
     );
+  }
+
+  errorToastBlow() {
+    window.Materialize.toast(
+      "Error! Please, verify the validity of the data :3",
+      3000
+    );
+  }
+
+  renderTodayTransactions() {
+    let todayTransactions = this.state.expancesAndProfits.filter(
+      tr =>
+        tr.date.substr(0, 2) == new Date().getDate() ||
+        tr.date.substr(0, 1) == new Date().getDate()
+    );
+    if (todayTransactions.length === 0) {
+      return (
+        <div className="statistic-board__empty-message">
+          <p>There no transactions for today</p>
+        </div>
+      );
+    } else {
+      return <TransactionsBoard expancesAndProfits={todayTransactions} />;
+    }
+  }
+
+  renderMonthTransactions() {
+    let monthTrans = this.state.expancesAndProfits;
+    if (monthTrans.length === 0) {
+      return (
+        <div className="statistic-board__empty-message">
+          <p>There no transactions for this month</p>
+        </div>
+      );
+    } else {
+      return <TransactionsBoard expancesAndProfits={monthTrans} />;
+    }
   }
 }
 
