@@ -40,6 +40,7 @@ class BudgetManager extends Component {
               dateChange={this.handleDateChange.bind(this)}
               getProfit={this.handleGetProfit.bind(this)}
               getExpanse={this.handleGetExpance.bind(this)}
+              state={this.state}
             />
           </div>
           <div className="budget-manager-board__statistic-board all-statistic">
@@ -93,7 +94,7 @@ class BudgetManager extends Component {
     }
   }
 
-  handleGetExpance() {
+  handleGetExpance(e) {
     const { name, value, date, expancesAndProfits } = this.state;
     if (!name == "" && !value == "" && !date == "" && value.match(/^\d+$/)) {
       this.setState({
@@ -109,6 +110,7 @@ class BudgetManager extends Component {
         ]
       });
       this.successToastBlow();
+      e.preventDefault();
       this.setState({
         id: "",
         type: "",
