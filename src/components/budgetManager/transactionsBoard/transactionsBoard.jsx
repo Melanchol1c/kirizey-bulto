@@ -10,7 +10,7 @@ class TransactionsBoard extends Component {
             <div key={i} className="card blue-grey darken-1 z-depth-5">
               <i
                 className="material-icons right delete-i"
-                onClick={this.props.delEvent}
+                onClick={() => this.props.onDelete(tr.id)}
               >
                 delete
               </i>

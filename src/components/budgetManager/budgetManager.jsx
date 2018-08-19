@@ -168,7 +168,7 @@ class BudgetManager extends Component {
     } else {
       return (
         <TransactionsBoard
-          delEvent={this.handleDelete.bind(this)}
+          onDelete={this.handleDelete.bind(this)}
           expancesAndProfits={todayTransactions}
         />
       );
@@ -186,17 +186,18 @@ class BudgetManager extends Component {
     } else {
       return (
         <TransactionsBoard
-          delEvent={this.handleDelete.bind(this)}
+          onDelete={this.handleDelete.bind(this)}
           expancesAndProfits={monthTrans}
         />
       );
     }
   }
 
-  handleDelete = (id, e) => {
-    const trans = Object.assign([], this.state.expancesAndProfits);
-    trans.splice(id, 1);
-    this.setState({ expancesAndProfits: trans });
+  handleDelete = id => {
+    const expancesAndProfits = this.state.expancesAndProfits.filter(
+      t => t.id !== id
+    );
+    this.setState({ expancesAndProfits });
   };
 }
 
