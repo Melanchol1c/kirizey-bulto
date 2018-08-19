@@ -16,8 +16,22 @@
 
   &__manager-wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 250px 1fr;
+    grid-template-areas: "t m a";
     margin-top: 3%;
+  }
+
+  .today-statistic {
+    grid-area: t;
+    &::-webkit-scrollbar {
+      width: 1px;
+    }
+  }
+  .all-statistic {
+    grid-area: a;
+    &::-webkit-scrollbar {
+      width: 1px;
+    }
   }
 
   &__statistic-board {
@@ -41,6 +55,8 @@
   &__empty-message {
     height: 80%;
     display: grid;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     opacity: 0.7;
   }
@@ -48,7 +64,7 @@
 
 .manipulating-board {
   &__add-btn {
-    margin-top: 6%;
+    margin-top: 4%;
   }
   &__title {
     font-family: "Kaushan Script", Helvetica, sans-serif;
@@ -58,4 +74,65 @@
 }
 .toast {
   background-color: #26a69a !important;
+}
+
+.modal {
+  background-color: #546e7aec !important;
+  color: #fff !important;
+  .modal-content {
+    text-align: center;
+    h4 {
+      font-family: "Kaushan Script", Helvetica, sans-serif;
+      font-size: 2em;
+      margin-top: 5%;
+    }
+    .row {
+      margin-top: 6em;
+    }
+  }
+  .modal-footer {
+    background-color: #546e7aec;
+    button {
+      color: #e7a148;
+      &:hover {
+        background-color: #e7a148;
+        color: #fff;
+      }
+    }
+  }
+}
+.modal-triggers {
+  display: grid;
+  height: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .budget-manager-board__manager-wrap {
+    grid-template-areas:
+      "m"
+      "t"
+      "a";
+    grid-template-columns: 1fr;
+  }
+  .budget-manager-board {
+    height: 100%;
+  }
+  .modal-triggers {
+    height: 150px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+  .modal-triggers *::before {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+  body {
+    overflow: visible;
+  }
 }

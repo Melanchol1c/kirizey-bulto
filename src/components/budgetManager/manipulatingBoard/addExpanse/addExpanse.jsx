@@ -6,7 +6,7 @@ class AddExpanse extends Component {
   render() {
     return (
       <React.Fragment>
-        <h3 className="manipulating-board__title">Add Expense</h3>
+        {/* <h3 className="manipulating-board__title">Add Expense</h3> */}
         <Row>
           <Input
             s={6}

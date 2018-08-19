@@ -4,7 +4,6 @@ import Tilt from "react-tilt";
 import { Link } from "react-router-dom";
 
 class StartMenu extends Component {
-  state = {};
   render() {
     return (
       <React.Fragment>

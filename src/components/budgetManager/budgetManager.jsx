@@ -15,7 +15,43 @@ class BudgetManager extends Component {
       name: "",
       value: "",
       date: "",
-      expancesAndProfits: []
+      expancesAndProfits: [
+        {
+          id: 1,
+          type: "Expanse",
+          name: "Macbook Air",
+          value: "895",
+          date: "12/12/18"
+        },
+        {
+          id: 1,
+          type: "Expanse",
+          name: "Macbook Air",
+          value: "895",
+          date: "12/12/18"
+        },
+        {
+          id: 1,
+          type: "Expanse",
+          name: "Macbook Air",
+          value: "895",
+          date: "12/12/18"
+        },
+        {
+          id: 1,
+          type: "Expanse",
+          name: "Macbook Air",
+          value: "895",
+          date: "12/12/18"
+        },
+        {
+          id: 1,
+          type: "Expanse",
+          name: "Macbook Air",
+          value: "895",
+          date: "12/12/18"
+        }
+      ]
     };
   }
 
@@ -26,24 +62,23 @@ class BudgetManager extends Component {
 
         <h1 className="budget-manager-board__title">Budget Manager</h1>
         <div className="budget-manager-board__manager-wrap">
-          <div className="budget-manager-board__statistic-board today-statistic">
+          <div className="budget-manager-board__statistic-board today-statistic z-depth-5">
             <h3 className="statistic-board__title">
               Expenses and profits for today
             </h3>
-
             {this.renderTodayTransactions()}
           </div>
           <div className="budget-manager-board__manipulating-board">
             <ManipulatingBoard
-              nameChange={this.handleNameChange.bind(this)}
-              valueChange={this.handleValueChange.bind(this)}
-              dateChange={this.handleDateChange.bind(this)}
-              getProfit={this.handleGetProfit.bind(this)}
+              nameChange={this.handleNameChange}
+              valueChange={this.handleValueChange}
+              dateChange={this.handleDateChange}
+              getProfit={this.handleGetProfit}
               getExpanse={this.handleGetExpance.bind(this)}
               state={this.state}
             />
           </div>
-          <div className="budget-manager-board__statistic-board all-statistic">
+          <div className="budget-manager-board__statistic-board all-statistic z-depth-5">
             <h3 className="statistic-board__title">
               Expenses and profits for month
             </h3>
@@ -54,19 +89,19 @@ class BudgetManager extends Component {
     );
   }
 
-  handleNameChange(e) {
+  handleNameChange = e => {
     this.setState({ name: e.target.value });
-  }
+  };
 
-  handleValueChange(e) {
+  handleValueChange = e => {
     this.setState({ value: e.target.value });
-  }
+  };
 
-  handleDateChange(e) {
+  handleDateChange = e => {
     this.setState({ date: e.target.value });
-  }
+  };
 
-  handleGetProfit() {
+  handleGetProfit = e => {
     const { name, value, date, expancesAndProfits } = this.state;
     if (!name == "" && !value == "" && !date == "" && value.match(/^\d+$/)) {
       this.setState({
@@ -82,6 +117,7 @@ class BudgetManager extends Component {
         ]
       });
       this.successToastBlow();
+      e.preventDefault();
       this.setState({
         id: "",
         type: "",
@@ -92,9 +128,9 @@ class BudgetManager extends Component {
     } else {
       this.errorToastBlow();
     }
-  }
+  };
 
-  handleGetExpance(e) {
+  handleGetExpance = e => {
     const { name, value, date, expancesAndProfits } = this.state;
     if (!name == "" && !value == "" && !date == "" && value.match(/^\d+$/)) {
       this.setState({
@@ -121,7 +157,7 @@ class BudgetManager extends Component {
     } else {
       this.errorToastBlow();
     }
-  }
+  };
 
   successToastBlow() {
     window.Materialize.toast(
@@ -143,6 +179,7 @@ class BudgetManager extends Component {
         tr.date.substr(0, 2) == new Date().getDate() ||
         tr.date.substr(0, 1) == new Date().getDate()
     );
+
     if (todayTransactions.length === 0) {
       return (
         <div className="statistic-board__empty-message">

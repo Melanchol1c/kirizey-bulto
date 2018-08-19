@@ -6,7 +6,7 @@ class AddProfit extends Component {
   render() {
     return (
       <React.Fragment>
-        <h3 className="manipulating-board__title">Add Profit</h3>
+        {/* <h3 className="manipulating-board__title">Add Profit</h3> */}
         <Row>
           <Input
             type="text"

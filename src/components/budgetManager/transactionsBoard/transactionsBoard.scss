@@ -1,0 +1,26 @@
+.statistic-board__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(166px, 1fr));
+  grid-gap: 5px;
+  .card {
+    height: 9em;
+    margin: 0;
+    .card__btn {
+      margin: 2px;
+    }
+    span {
+      font-size: 1.2em;
+      margin: 0;
+      text-transform: uppercase;
+      color: #e7a148;
+    }
+    i {
+      line-height: 29px;
+      cursor: pointer;
+      color: #e7a148;
+    }
+    .delete-i {
+      color: rgb(238, 64, 64);
+    }
+  }
+}
