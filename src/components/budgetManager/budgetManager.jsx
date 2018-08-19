@@ -6,33 +6,29 @@ import ManipulatingBoard from "./manipulatingBoard/manipulatingBoard";
 import TransactionsBoard from "./transactionsBoard/transactionsBoard";
 
 class BudgetManager extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      id: "",
-      type: "",
-      name: "",
-      value: "",
-      date: "",
-      expancesAndProfits: [
-        {
-          id: 1,
-          type: "Expanse",
-          name: "Macbook Air",
-          value: "895",
-          date: "12/12/18"
-        },
-        {
-          id: 2,
-          type: "Expanse",
-          name: "Macbook Air",
-          value: "895",
-          date: "12/12/18"
-        }
-      ]
-    };
-  }
+  state = {
+    id: "",
+    type: "",
+    name: "",
+    value: "",
+    date: "",
+    expancesAndProfits: [
+      {
+        id: 1,
+        type: "Expanse",
+        name: "Macbook Air",
+        value: "895",
+        date: "12/12/18"
+      },
+      {
+        id: 2,
+        type: "Expanse",
+        name: "Macbook Air",
+        value: "895",
+        date: "12/12/18"
+      }
+    ]
+  };
 
   render() {
     return (
