@@ -143,8 +143,13 @@
     width: 100%;
     top: 0% !important;
     min-height: 90%;
+    height: 90%;
   }
   .picker--opened .picker__holder {
     top: 5%;
+  }
+  .btn {
+    font-size: 0.95em;
+    margin-top: 4%;
   }
 }
