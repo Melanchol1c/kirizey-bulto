@@ -49,20 +49,6 @@ const ManipulatingBoard = ({
           />
         </Modal>
       </div>
-      {/* <AddProfit
-        nameChange={nameChange}
-        valueChange={valueChange}
-        dateChange={dateChange}
-        getProfit={getProfit}
-        state={state}
-      /> */}
-      {/* <AddExpanse
-        nameChange={nameChange}
-        valueChange={valueChange}
-        dateChange={dateChange}
-        getExpanse={getExpanse}
-        state={state}
-      /> */}
     </React.Fragment>
   );
 };

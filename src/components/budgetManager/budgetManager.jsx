@@ -24,28 +24,7 @@ class BudgetManager extends Component {
           date: "12/12/18"
         },
         {
-          id: 1,
-          type: "Expanse",
-          name: "Macbook Air",
-          value: "895",
-          date: "12/12/18"
-        },
-        {
-          id: 1,
-          type: "Expanse",
-          name: "Macbook Air",
-          value: "895",
-          date: "12/12/18"
-        },
-        {
-          id: 1,
-          type: "Expanse",
-          name: "Macbook Air",
-          value: "895",
-          date: "12/12/18"
-        },
-        {
-          id: 1,
+          id: 2,
           type: "Expanse",
           name: "Macbook Air",
           value: "895",
@@ -187,7 +166,12 @@ class BudgetManager extends Component {
         </div>
       );
     } else {
-      return <TransactionsBoard expancesAndProfits={todayTransactions} />;
+      return (
+        <TransactionsBoard
+          delEvent={this.handleDelete.bind(this)}
+          expancesAndProfits={todayTransactions}
+        />
+      );
     }
   }
 
@@ -200,9 +184,20 @@ class BudgetManager extends Component {
         </div>
       );
     } else {
-      return <TransactionsBoard expancesAndProfits={monthTrans} />;
+      return (
+        <TransactionsBoard
+          delEvent={this.handleDelete.bind(this)}
+          expancesAndProfits={monthTrans}
+        />
+      );
     }
   }
+
+  handleDelete = (id, e) => {
+    const trans = Object.assign([], this.state.expancesAndProfits);
+    trans.splice(id, 1);
+    this.setState({ expancesAndProfits: trans });
+  };
 }
 
 export default BudgetManager;
