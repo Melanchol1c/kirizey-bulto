@@ -41,7 +41,7 @@ class AddProfit extends Component {
             <Icon>calendar_today</Icon>
           </Input>
           <Button
-            className="manipulating-board__add-btn waves-effect waves-light"
+            className="manipulating-board__add-btn btn btn-medium orange darken-4 waves-effect"
             onClick={this.props.getProfit}
           >
             Add Profit

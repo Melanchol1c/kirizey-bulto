@@ -44,7 +44,7 @@ const ManipulatingBoard = ({
             nameChange={nameChange}
             valueChange={valueChange}
             dateChange={dateChange}
-            getProfit={getExpanse}
+            getExpanse={getExpanse}
             state={state}
           />
         </Modal>
