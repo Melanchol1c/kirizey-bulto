@@ -12,19 +12,22 @@ class BudgetManager extends Component {
     name: "",
     value: "",
     date: "",
+    edit: false,
     expancesAndProfits: [
       {
         id: 1,
         type: "Expanse",
         name: "Macbook Air",
         value: "895",
+        edit: false,
         date: "12/12/18"
       },
       {
         id: 2,
-        type: "Expanse",
+        type: "Profit",
         name: "Macbook Air",
         value: "895",
+        edit: false,
         date: "12/12/18"
       }
     ]
@@ -87,7 +90,8 @@ class BudgetManager extends Component {
             type: "Profit",
             name: name,
             value: value,
-            date: date
+            date: date,
+            edit: false
           }
         ]
       });
@@ -98,7 +102,8 @@ class BudgetManager extends Component {
         type: "",
         name: "",
         value: "",
-        date: ""
+        date: "",
+        edit: false
       });
     } else {
       this.errorToastBlow();
@@ -165,6 +170,7 @@ class BudgetManager extends Component {
       return (
         <TransactionsBoard
           onDelete={this.handleDelete.bind(this)}
+          onEdit={this.handleEdit.bind(this)}
           expancesAndProfits={todayTransactions}
         />
       );
@@ -183,6 +189,7 @@ class BudgetManager extends Component {
       return (
         <TransactionsBoard
           onDelete={this.handleDelete.bind(this)}
+          onEdit={this.handleEdit.bind(this)}
           expancesAndProfits={monthTrans}
         />
       );
@@ -194,6 +201,14 @@ class BudgetManager extends Component {
       t => t.id !== id
     );
     this.setState({ expancesAndProfits });
+  };
+
+  handleEdit = item => {
+    const trans = [...this.state.expancesAndProfits];
+    const i = trans.indexOf(item);
+    trans[i].edit = !trans[i].edit;
+    trans[i] = { ...item };
+    this.setState({ trans });
   };
 }
 

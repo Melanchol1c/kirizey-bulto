@@ -13,14 +13,38 @@
       margin: 0;
       text-transform: uppercase;
       color: #e7a148;
+      margin-left: 25px;
     }
     i {
       line-height: 29px;
       cursor: pointer;
       color: #e7a148;
+      margin-left: 0;
     }
     .delete-i {
       color: rgb(238, 64, 64);
     }
+  }
+  .expanse {
+    color: rgb(238, 64, 64) !important;
+  }
+  .profit {
+    color: #26a69a !important;
+  }
+  .edit-input {
+    height: 1em !important;
+    width: 50% !important;
+    font-size: 1.1em !important;
+    text-align: center;
+    margin-left: -25px !important;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0 !important;
+  }
+  .input-field {
+    margin-top: 0;
+  }
+  .submit-i {
+    color: #26a69a !important;
+    margin-right: 3%;
   }
 }
