@@ -52,7 +52,7 @@ class BudgetManager extends Component {
               valueChange={this.handleValueChange}
               dateChange={this.handleDateChange}
               getProfit={this.handleGetProfit}
-              getExpanse={this.handleGetExpance.bind(this)}
+              getExpanse={this.handleGetExpance}
               state={this.state}
             />
           </div>

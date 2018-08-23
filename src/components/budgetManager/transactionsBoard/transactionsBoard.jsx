@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./transactionsBoard.scss";
-import { Input } from "react-materialize";
 
 class TransactionsBoard extends Component {
   state = {};

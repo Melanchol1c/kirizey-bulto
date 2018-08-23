@@ -12,11 +12,11 @@ const StartMenu = () => {
             <h1 className="start-menu__title">Kirizey Bulto</h1>
             <div className="start-menu__selection-block">
               <Link
-                to="/task_manager"
+                to="/week_manager"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
                 <div className="selection-block__selection-item selection-block__selection-item--left">
-                  <h2 className="selection-item__title">Task Manager</h2>
+                  <h2 className="selection-item__title">Week Manager</h2>
                   <p className="selection-item__description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Labore adipisci unde possimus dicta vero nobis voluptatum
