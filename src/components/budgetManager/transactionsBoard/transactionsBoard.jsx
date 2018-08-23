@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./transactionsBoard.scss";
 
 class TransactionsBoard extends Component {
-  state = {};
   render() {
     return (
       <React.Fragment>

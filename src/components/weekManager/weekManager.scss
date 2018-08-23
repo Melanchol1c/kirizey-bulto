@@ -35,9 +35,15 @@
       text-align: left;
       background-color: lighten(#546e7a, 10%);
       display: flex;
+      justify-content: space-between;
+      align-content: center;
       cursor: pointer;
       position: relative;
       transition: 0.3s;
+      .delete-i {
+        color: rgb(238, 64, 64);
+        cursor: pointer;
+      }
       &:hover {
         background-color: #546e7a;
       }

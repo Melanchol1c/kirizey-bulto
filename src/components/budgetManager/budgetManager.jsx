@@ -169,8 +169,8 @@ class BudgetManager extends Component {
     } else {
       return (
         <TransactionsBoard
-          onDelete={this.handleDelete.bind(this)}
-          onEdit={this.handleEdit.bind(this)}
+          onDelete={this.handleDelete}
+          onEdit={this.handleEdit}
           expancesAndProfits={todayTransactions}
         />
       );
@@ -188,8 +188,8 @@ class BudgetManager extends Component {
     } else {
       return (
         <TransactionsBoard
-          onDelete={this.handleDelete.bind(this)}
-          onEdit={this.handleEdit.bind(this)}
+          onDelete={this.handleDelete}
+          onEdit={this.handleEdit}
           expancesAndProfits={monthTrans}
         />
       );

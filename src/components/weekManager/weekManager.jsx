@@ -11,17 +11,11 @@ class WeekManager extends Component {
     days: [
       {
         day: "Monday",
-        tasks: [
-          { id: 1, task: "Do something", complete: false },
-          { id: 2, task: "Do something 2", complete: false }
-        ]
+        tasks: []
       },
       {
         day: "Tuesday",
-        tasks: [
-          { id: 3, task: "Do something", complete: false },
-          { id: 4, task: "Do something 2", complete: false }
-        ]
+        tasks: []
       },
       {
         day: "Wednesday",
@@ -32,14 +26,11 @@ class WeekManager extends Component {
       },
       {
         day: "Thursday",
-        tasks: [
-          { id: 7, task: "Do something", complete: false },
-          { id: 8, task: "Do something 2", complete: false }
-        ]
+        tasks: []
       },
       {
         day: "Friday",
-        tasks: [{ id: 9, task: "Do something 2", complete: false }]
+        tasks: []
       },
       {
         day: "Saturday",
@@ -47,10 +38,7 @@ class WeekManager extends Component {
       },
       {
         day: "Sunday",
-        tasks: [
-          { id: 11, task: "Do something", complete: false },
-          { id: 12, task: "Do something 2", complete: false }
-        ]
+        tasks: []
       }
     ]
   };
@@ -70,15 +58,20 @@ class WeekManager extends Component {
                   <div className="card-content white-text">
                     <span className="card-title">{d.day}</span>
                     {d.tasks.map(t => (
-                      <div
-                        className="task"
-                        key={t.id}
-                        onClick={() => this.handleCompleteTask(d, t)}
-                      >
-                        <div className={this.handleTaskClass(t)} />
+                      <div className="task" key={t.id}>
+                        <div
+                          className={this.handleTaskClass(t)}
+                          onClick={() => this.handleCompleteTask(d, t)}
+                        />
                         <p className={this.handleDescriptionClass(t)}>
                           {t.task}
                         </p>
+                        <i
+                          className="material-icons right delete-i"
+                          onClick={() => this.handleDelete(d, t)}
+                        >
+                          delete
+                        </i>
                       </div>
                     ))}
                   </div>
@@ -128,6 +121,15 @@ class WeekManager extends Component {
       this.setState({ days, taskNewName: "" });
       this.successToastBlow(day.day);
     }
+  };
+
+  handleDelete = (day, task) => {
+    let days = [...this.state.days];
+    let tasks = [...day.tasks];
+    const newTasks = tasks.filter(t => t.id !== task.id);
+    tasks = newTasks;
+    days[days.indexOf(day)].tasks = tasks;
+    this.setState({ days });
   };
 
   successToastBlow(day) {
