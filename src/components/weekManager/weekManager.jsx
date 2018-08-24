@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "../navbar/navbar";
 import "./weekManager.scss";
-import { Icon, Modal } from "react-materialize";
+import { Icon, Modal, Input } from "react-materialize";
 import AddTask from "./addTask/addTask";
 
 class WeekManager extends Component {
@@ -20,8 +20,8 @@ class WeekManager extends Component {
       {
         day: "Wednesday",
         tasks: [
-          { id: 5, task: "Do something", complete: false },
-          { id: 6, task: "Do something 2", complete: false }
+          { id: 5, task: "Do something", complete: false, edit: false },
+          { id: 6, task: "Do something 2", complete: false, edit: false }
         ]
       },
       {
@@ -34,7 +34,9 @@ class WeekManager extends Component {
       },
       {
         day: "Saturday",
-        tasks: [{ id: 10, task: "Do something 2", complete: false }]
+        tasks: [
+          { id: 10, task: "Do something 2", complete: false, edit: false }
+        ]
       },
       {
         day: "Sunday",
@@ -57,23 +59,67 @@ class WeekManager extends Component {
                 >
                   <div className="card-content white-text">
                     <span className="card-title">{d.day}</span>
-                    {d.tasks.map(t => (
-                      <div className="task" key={t.id}>
-                        <div
-                          className={this.handleTaskClass(t)}
-                          onClick={() => this.handleCompleteTask(d, t)}
-                        />
-                        <p className={this.handleDescriptionClass(t)}>
-                          {t.task}
-                        </p>
-                        <i
-                          className="material-icons right delete-i"
-                          onClick={() => this.handleDelete(d, t)}
-                        >
-                          delete
-                        </i>
-                      </div>
-                    ))}
+                    {d.tasks.map(
+                      t =>
+                        t.edit ? (
+                          <div className="task" key={t.id}>
+                            <div
+                              className={this.handleTaskClass(t)}
+                              onClick={() => this.handleCompleteTask(d, t)}
+                            />
+                            <p className={this.handleDescriptionClass(t)}>
+                              <input
+                                className="edit-input"
+                                onChange={this.handleTaskNameChange}
+                                value={this.state.taskNewName}
+                              />
+                            </p>
+                            <div className="task__actions">
+                              <i
+                                className="material-icons submit-i"
+                                onClick={() => this.handleEdit(d, t)}
+                              >
+                                done_all
+                              </i>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="task" key={t.id}>
+                            <div
+                              className={this.handleTaskClass(t)}
+                              onClick={() => this.handleCompleteTask(d, t)}
+                            />
+                            <p className={this.handleDescriptionClass(t)}>
+                              {t.task}
+                            </p>
+                            <div className="task__actions">
+                              {t.complete ? (
+                                <i
+                                  className="material-icons right delete-i"
+                                  onClick={() => this.handleDelete(d, t)}
+                                >
+                                  delete
+                                </i>
+                              ) : (
+                                <React.Fragment>
+                                  <i
+                                    className="material-icons  edit-i"
+                                    onClick={() => this.handleEdit(d, t)}
+                                  >
+                                    edit
+                                  </i>
+                                  <i
+                                    className="material-icons right delete-i"
+                                    onClick={() => this.handleDelete(d, t)}
+                                  >
+                                    delete
+                                  </i>
+                                </React.Fragment>
+                              )}
+                            </div>
+                          </div>
+                        )
+                    )}
                   </div>
                   <div className="card-action">
                     <Modal
@@ -103,6 +149,30 @@ class WeekManager extends Component {
     );
   }
 
+  handleEdit = (day, task) => {
+    let days = [...this.state.days];
+    let tasks = [...day.tasks];
+    const doneTask = tasks.filter(t => t.id === task.id)[0];
+    this.setState({ taskNewName: task.task });
+
+    if (task.edit) {
+      task.task = this.state.taskNewName;
+      doneTask.edit = !doneTask.edit;
+      this.setState({ taskNewName: "" });
+    } else {
+      doneTask.edit = !doneTask.edit;
+    }
+    this.setState({ days });
+  };
+
+  handleCompleteTask = (day, task) => {
+    let days = [...this.state.days];
+    let tasks = [...day.tasks];
+    const doneTask = tasks.filter(t => t.id === task.id)[0];
+    doneTask.complete = !doneTask.complete;
+    this.setState({ days });
+  };
+
   handleCreateTask = day => {
     let days = [...this.state.days];
     const i = days.indexOf(day);
@@ -110,7 +180,8 @@ class WeekManager extends Component {
     const newTask = {
       id: Date.now(),
       task: this.state.taskNewName,
-      complete: false
+      complete: false,
+      edit: false
     };
     let tasks = [...day.tasks, newTask];
     days[i] = { ...days[i], tasks };
@@ -148,15 +219,6 @@ class WeekManager extends Component {
 
   handleTaskNameChange = e => {
     this.setState({ taskNewName: e.target.value });
-  };
-  handleNewTaskDay = () => {};
-
-  handleCompleteTask = (day, task) => {
-    let days = [...this.state.days];
-    let tasks = [...day.tasks];
-    const doneTask = tasks.filter(t => t.id === task.id)[0];
-    doneTask.complete = !doneTask.complete;
-    this.setState({ days });
   };
 
   handleDescriptionClass = task => {

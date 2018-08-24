@@ -28,7 +28,7 @@
     }
     .task {
       width: 100%;
-      height: 2em;
+      // height: 2em;
       padding-top: 0.7%;
       margin: 2% 0 2% 0;
       border: 1px solid #fff;
@@ -36,16 +36,33 @@
       background-color: lighten(#546e7a, 10%);
       display: flex;
       justify-content: space-between;
-      align-content: center;
+      align-items: center;
       cursor: pointer;
       position: relative;
       transition: 0.3s;
+      i {
+        cursor: pointer;
+        color: #e7a148;
+        margin-left: 0;
+        width: 50%;
+      }
       .delete-i {
         color: rgb(238, 64, 64);
-        cursor: pointer;
+      }
+      .submit-i {
+        color: #26a69a !important;
+        right: 20%;
+        float: right;
+        position: relative;
       }
       &:hover {
         background-color: #546e7a;
+      }
+      .task__description {
+        width: 70%;
+      }
+      .task__actions {
+        width: 15%;
       }
     }
     .input {
@@ -64,17 +81,14 @@
     .done {
       background-color: green;
     }
+    .edit-input {
+      height: 100%;
+      margin-top: 10%;
+    }
 
     .done-descr {
-      &::before {
-        content: "";
-        position: absolute;
-        width: 96%;
-        left: 2%;
-        top: 45%;
-        height: 2px;
-        background-color: #3f5c69;
-      }
+      opacity: 0.7;
+      text-decoration: line-through;
     }
     .days-section__day {
       height: fit-content;
