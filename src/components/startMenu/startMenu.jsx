@@ -18,9 +18,7 @@ const StartMenu = () => {
                 <div className="selection-block__selection-item selection-block__selection-item--left">
                   <h2 className="selection-item__title">Week Manager</h2>
                   <p className="selection-item__description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Labore adipisci unde possimus dicta vero nobis voluptatum
-                    consequuntur animi officiis pariatur?
+                    Simple task manager for every day of the week
                   </p>
                 </div>
               </Link>
@@ -31,9 +29,8 @@ const StartMenu = () => {
                 <div className="selection-block__selection-item selection-block__selection-item--right">
                   <h2 className="selection-item__title">Budget Manager</h2>
                   <p className="selection-item__description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Molestiae, ab quos adipisci nemo ducimus tenetur veniam?
-                    Cumque nihil autem maxime.
+                    Simple manager of your budget, allowing you to record and
+                    monitor your spending and replenishment
                   </p>
                 </div>
               </Link>

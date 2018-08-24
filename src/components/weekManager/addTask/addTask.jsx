@@ -20,7 +20,7 @@ class AddTask extends Component {
           className="manipulating-board__add-btn btn btn-medium orange darken-4 waves-effect"
           onClick={this.props.createTask}
         >
-          Add Expense
+          Add Task
         </Button>
       </div>
     );
