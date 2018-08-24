@@ -51,26 +51,31 @@ class WeekManager extends Component {
           <Navbar />
           <section className="week-manager-board">
             <h1 className="week-manager-board__title">Week Manager</h1>
-            <div className="week-manager-board__days-section">
+            <div className="week-manager-board__days-section ">
               {this.state.days.map(d => (
                 <div
                   key={d.day}
                   className="card blue-grey darken-1 z-depth-5 days-section__day "
                 >
+                  <i
+                    className="material-icons clear-i tooltipped "
+                    data-position="top"
+                    data-tooltip="Clear tasks of the day"
+                    onClick={() => this.handleClearDay(d)}
+                  >
+                    cancel
+                  </i>
                   <div className="card-content white-text">
                     <span className="card-title">{d.day}</span>
                     {d.tasks.map(
                       t =>
                         t.edit ? (
                           <div className="task" key={t.id}>
-                            <div
-                              className={this.handleTaskClass(t)}
-                              onClick={() => this.handleCompleteTask(d, t)}
-                            />
                             <p className={this.handleDescriptionClass(t)}>
                               <input
                                 className="edit-input"
                                 onChange={this.handleTaskNameChange}
+                                type="text"
                                 value={this.state.taskNewName}
                               />
                             </p>
@@ -85,31 +90,39 @@ class WeekManager extends Component {
                           </div>
                         ) : (
                           <div className="task" key={t.id}>
-                            <div
+                            <Input
+                              type="checkbox"
+                              value="green"
+                              label="."
                               className={this.handleTaskClass(t)}
                               onClick={() => this.handleCompleteTask(d, t)}
                             />
+
                             <p className={this.handleDescriptionClass(t)}>
                               {t.task}
                             </p>
                             <div className="task__actions">
                               {t.complete ? (
                                 <i
-                                  className="material-icons right delete-i"
+                                  className="material-icons tooltipped right delete-i"
                                   onClick={() => this.handleDelete(d, t)}
+                                  data-position="top"
+                                  data-tooltip="Delete task"
                                 >
                                   delete
                                 </i>
                               ) : (
                                 <React.Fragment>
                                   <i
-                                    className="material-icons  edit-i"
+                                    className="material-icons edit-i"
                                     onClick={() => this.handleEdit(d, t)}
                                   >
                                     edit
                                   </i>
                                   <i
-                                    className="material-icons right delete-i"
+                                    className="material-icons right tooltipped delete-i"
+                                    data-position="top"
+                                    data-tooltip="Delete task"
                                     onClick={() => this.handleDelete(d, t)}
                                   >
                                     delete
@@ -148,6 +161,13 @@ class WeekManager extends Component {
       </React.Fragment>
     );
   }
+
+  handleClearDay = day => {
+    let days = [...this.state.days];
+    const i = days.indexOf(day);
+    days[i].tasks.splice(0, days[i].tasks.length);
+    this.setState({ days });
+  };
 
   handleEdit = (day, task) => {
     let days = [...this.state.days];
@@ -228,7 +248,7 @@ class WeekManager extends Component {
   };
 
   handleTaskClass = task => {
-    let className = "input ";
+    let className = "input filled-in ";
     return (className =
       task.complete === true ? (className += "done") : className);
   };

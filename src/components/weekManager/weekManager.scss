@@ -18,10 +18,12 @@
     }
 
     &__days-section {
+      padding: 2% 1%;
       margin: 3% 1%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 5px;
+      background: rgba(0, 0, 0, 0.2);
     }
     .card .card-content {
       padding: 24px 3% 0 3% !important;
@@ -40,11 +42,23 @@
       cursor: pointer;
       position: relative;
       transition: 0.3s;
+      .col {
+        margin-top: 1%;
+        margin-left: 3%;
+        [type="checkbox"].filled-in:not(:checked) + label:after {
+          border: 1px solid #fff;
+        }
+      }
       i {
         cursor: pointer;
         color: #e7a148;
         margin-left: 0;
         width: 50%;
+        opacity: 0.5;
+
+        &:hover {
+          opacity: 1;
+        }
       }
       .delete-i {
         color: rgb(238, 64, 64);
@@ -54,7 +68,9 @@
         right: 20%;
         float: right;
         position: relative;
+        opacity: 1;
       }
+
       &:hover {
         background-color: #546e7a;
       }
@@ -78,12 +94,10 @@
       width: 15px;
       transition: 0.3s;
     }
-    .done {
-      background-color: green;
-    }
     .edit-input {
       height: 100%;
       margin-top: 10%;
+      margin-left: 23%;
     }
 
     .done-descr {
@@ -92,6 +106,18 @@
     }
     .days-section__day {
       height: fit-content;
+      position: relative;
+      .clear-i {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+        cursor: pointer;
+        color: rgb(238, 64, 64);
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+        }
+      }
 
       .card-action {
         opacity: 0.8;
