@@ -67,71 +67,70 @@ class WeekManager extends Component {
                   </i>
                   <div className="card-content white-text">
                     <span className="card-title">{d.day}</span>
-                    {d.tasks.map(
-                      t =>
-                        t.edit ? (
-                          <div className="task" key={t.id}>
-                            <p className={this.handleDescriptionClass(t)}>
-                              <input
-                                className="edit-input"
-                                onChange={this.handleTaskNameChange}
-                                type="text"
-                                value={this.state.taskNewName}
-                              />
-                            </p>
-                            <div className="task__actions">
-                              <i
-                                className="material-icons submit-i"
-                                onClick={() => this.handleEdit(d, t)}
-                              >
-                                done_all
-                              </i>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="task" key={t.id}>
-                            <Input
-                              type="checkbox"
-                              value="green"
-                              label="."
-                              className={this.handleTaskClass(t)}
-                              onClick={() => this.handleCompleteTask(d, t)}
+                    {d.tasks.map(t =>
+                      t.edit ? (
+                        <div className="task" key={t.id}>
+                          <p className={this.handleDescriptionClass(t)}>
+                            <input
+                              className="edit-input"
+                              onChange={this.handleTaskNameChange}
+                              type="text"
+                              value={this.state.taskNewName}
                             />
+                          </p>
+                          <div className="task__actions">
+                            <i
+                              className="material-icons submit-i"
+                              onClick={() => this.handleEdit(d, t)}
+                            >
+                              done_all
+                            </i>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="task" key={t.id}>
+                          <Input
+                            type="checkbox"
+                            value="green"
+                            label="."
+                            className={this.handleTaskClass(t)}
+                            onClick={() => this.handleCompleteTask(d, t)}
+                          />
 
-                            <p className={this.handleDescriptionClass(t)}>
-                              {t.task}
-                            </p>
-                            <div className="task__actions">
-                              {t.complete ? (
+                          <p className={this.handleDescriptionClass(t)}>
+                            {t.task}
+                          </p>
+                          <div className="task__actions">
+                            {t.complete ? (
+                              <i
+                                className="material-icons tooltipped right delete-i"
+                                onClick={() => this.handleDelete(d, t)}
+                                data-position="top"
+                                data-tooltip="Delete task"
+                              >
+                                delete
+                              </i>
+                            ) : (
+                              <React.Fragment>
                                 <i
-                                  className="material-icons tooltipped right delete-i"
-                                  onClick={() => this.handleDelete(d, t)}
+                                  className="material-icons edit-i"
+                                  onClick={() => this.handleEdit(d, t)}
+                                >
+                                  edit
+                                </i>
+                                <i
+                                  className="material-icons right tooltipped delete-i"
                                   data-position="top"
                                   data-tooltip="Delete task"
+                                  onClick={() => this.handleDelete(d, t)}
                                 >
                                   delete
                                 </i>
-                              ) : (
-                                <React.Fragment>
-                                  <i
-                                    className="material-icons edit-i"
-                                    onClick={() => this.handleEdit(d, t)}
-                                  >
-                                    edit
-                                  </i>
-                                  <i
-                                    className="material-icons right tooltipped delete-i"
-                                    data-position="top"
-                                    data-tooltip="Delete task"
-                                    onClick={() => this.handleDelete(d, t)}
-                                  >
-                                    delete
-                                  </i>
-                                </React.Fragment>
-                              )}
-                            </div>
+                              </React.Fragment>
+                            )}
                           </div>
-                        )
+                        </div>
+                      )
                     )}
                   </div>
                   <div className="card-action">
